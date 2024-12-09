@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-200 flex items-center justify-center min-h-screen p-4">
+    <div
+      class="w-full max-w-sm sm:max-w-md bg-white rounded-lg shadow-lg p-4 sm:p-6"
+    >
+      <h1 class="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-center">
+        ISAK HOTSPOT
+      </h1>
+      <p class="text-md text-gray-800 mb-4 text-justify">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
+        eveniet odio perferendis facilis incidunt nam quisquam aut aspernatur
+        similique earum.
+      </p>
+      <p id="dynamicText" class="text-md text-gray-800 mb-4 text-center font-bold">
+        Silahkan masukkan kode voucher yang anda miliki
+      </p>
+
+      <!-- Tabs -->
+      <div class="flex justify-center mb-6">
+        <button
+          id="voucherTab"
+          onclick="openTab('voucher', this)"
+          class="tablinks px-2 sm:px-4 py-2 text-sm sm:text-base text-gray-800 bg-gray-200 rounded-l-md"
+        >
+          Voucher
+        </button>
+        <button
+          id="memberTab"
+          onclick="openTab('member', this)"
+          class="tablinks px-2 sm:px-4 py-2 text-sm sm:text-base text-gray-800 bg-gray-200 rounded-r-md"
+        >
+          Member
+        </button>
+      </div>
+
+      <!-- Voucher Login Form -->
+      <div id="voucher" class="tab-content">
+        <form action="$(link-login-only)" method="post" class="space-y-4">
+          <input type="hidden" name="dst" value="$(link-orig)" />
+          <input type="hidden" name="popup" value="true" />
+          <label class="block">
+            <!-- <span class="text-sm sm:text-base text-gray-700">Kode Voucher :</span> -->
+            <input
+              type="text"
+              name="username"
+              class="w-full mt-1 px-3 sm:px-4 py-2 text-sm sm:text-base border border-gray-400 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Masukkan kode voucher "
+              required
+            />
+          </label>
+          <button
+            type="submit"
+            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md text-sm sm:text-base"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+
+      <!-- Username & Password Login Form -->
+      <div id="member" class="tab-content hidden">
+        <form action="$(link-login-only)" method="post" class="space-y-4">
+          <input type="hidden" name="dst" value="$(link-orig)" />
+          <input type="hidden" name="popup" value="true" />
+          <label class="block">
+            <span class="text-sm sm:text-base text-gray-700">Username:</span>
+            <input
+              type="text"
+              name="username"
+              class="w-full mt-1 px-3 sm:px-4 py-2 text-sm sm:text-base border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Masukkan username"
+              required
+            />
+          </label>
+          <label class="block">
+            <span class="text-sm sm:text-base text-gray-700">Password:</span>
+            <input
+              type="password"
+              name="password"
+              class="w-full mt-1 px-3 sm:px-4 py-2 text-sm sm:text-base border rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              placeholder="Masukkan password"
+              required
+            />
+          </label>
+          <button
+            type="submit"
+            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-md text-sm sm:text-base"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+
+      <div class="mt-6 space-y-2">
+        <h3 class="text-center text-lg font-semibold text-blue-900">Harga Paket :</h3>
+        <div class="grid grid-cols-2 gap-2 text-center text-sm sm:text-base font-medium text-blue-900">
+          <div>2 Jam Rp. 2.000</div>
+          <div>3 Jam Rp. 3.000</div>
+          <div>8 Jam Rp. 4.000</div>
+          <div>1 Hari Rp. 6.000</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+      function openTab(tabName, tabElement) {
+        // Hide all tab contents
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((tab) => tab.classList.add("hidden"));
+
+        // Show the selected tab content
+        document.getElementById(tabName).classList.remove("hidden");
+
+        // Reset all tabs to default background
+        document.querySelectorAll(".tablinks").forEach((tab) => {
+          tab.classList.remove("bg-blue-500", "text-white");
+          tab.classList.add("bg-gray-200", "text-gray-800");
+        });
+
+        // Highlight the selected tab
+        tabElement.classList.remove("bg-gray-200", "text-gray-800");
+        tabElement.classList.add("bg-blue-500", "text-white");
+
+     // Update dynamic text based on the tab
+        const dynamicText = document.getElementById("dynamicText");
+        if (tabName === "voucher") {
+          dynamicText.textContent = "Silahkan masukkan kode voucher yang anda miliki";
+        } else if (tabName === "member") {
+          dynamicText.textContent = "Selamat datang kembali!";
+        }
+      }
+
+      // Open the default tab on page load
+      document.getElementById("voucherTab").click();
+    </script>
+  </body>
+</html>
